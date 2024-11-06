@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "435876918808",
+    "project_id": "browser-agevole-2024",
+    "storage_bucket": "browser-agevole-2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435876918808:android:47b181d8ecf5fb5b99f56d",
+        "android_client_info": {
+          "package_name": "com.agevole.browser"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZBqYWZqjax0JYU4r0Nu7YyYCoLh2Tjnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
