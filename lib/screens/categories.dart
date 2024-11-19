@@ -19,22 +19,29 @@ class _CategoryPageState extends State<CategoryPage> {
 
   final Map<String, IconData> categoryIcons = {
     'Social Networking': Icons.facebook_rounded,
+    'Entertainment': Icons.movie_filter_outlined,
     'Shopping': Icons.shopping_bag_outlined,
+    'Games': Icons.games_rounded,
+    'Music': Icons.music_note_rounded,
     'News': Icons.newspaper_rounded,
-    'Sports': Icons.sports,
     'Education': Icons.school_outlined,
-    'Email': Icons.mail_outline_rounded,
     'Travel': Icons.travel_explore_rounded,
+    'Health': Icons.health_and_safety_outlined,
+    'Sports': Icons.sports,
+    'Fitness': Icons.fitness_center_rounded,
     'Job Seeker': Icons.person_outline_rounded,
-    'Kids': Icons.train_outlined,
+    'Cooking': Icons.restaurant_outlined,
+    'Books': Icons.menu_book_rounded,
+    'Comics': Icons.book_rounded,
+    'Course': Icons.collections_bookmark_sharp,
+    'Popular': Icons.trending_up_rounded,
     'Hobby': Icons.local_play_rounded,
-    'Booking and Literature': Icons.computer,
-    'Health': Icons.computer,
+    'Fashion': Icons.directions_walk_rounded,
+    'Kids': Icons.train_outlined,
+    'Email': Icons.mail_outline_rounded,
+    'Booking and Literature': Icons.library_books_rounded,
     'Software': Icons.computer,
-    'Fashion': Icons.computer,
-    'Fitness': Icons.computer,
-    'Cooking': Icons.computer,
-    'Uncategorized': Icons.category,
+    'Other': Icons.category,
   };
 
   @override
@@ -53,15 +60,23 @@ class _CategoryPageState extends State<CategoryPage> {
 
           final categories = <String, List<QueryDocumentSnapshot>>{};
           snapshot.data?.docs.forEach((doc) {
-            final category = doc['category'] ?? 'Uncategorized';
+            final category = doc['category'] ?? 'Other';
             if (!categories.containsKey(category)) {
               categories[category] = [];
             }
             categories[category]!.add(doc);
           });
+          // Sort categories based on the order of `categoryIcons`.
+          final sortedCategories = categories.keys.toList()
+            ..sort((a, b) {
+              final indexA = categoryIcons.keys.toList().indexOf(a);
+              final indexB = categoryIcons.keys.toList().indexOf(b);
+              return (indexA == -1 ? double.maxFinite : indexA)
+                  .compareTo(indexB == -1 ? double.maxFinite : indexB);
+            });
 
           return ListView(
-            children: categories.keys.map((category) {
+            children: sortedCategories.map((category) {
               final categoryLinks = categories[category]!;
               final isExpanded = expandedCategories[category] ?? false;
 
@@ -76,7 +91,7 @@ class _CategoryPageState extends State<CategoryPage> {
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
+                          horizontal: 15, vertical: 15),
                       margin: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(

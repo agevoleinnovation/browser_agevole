@@ -1,4 +1,4 @@
-package com.agevole.browser
+package com.agevole.website.zone
 
 import io.flutter.embedding.android.FlutterActivity
 

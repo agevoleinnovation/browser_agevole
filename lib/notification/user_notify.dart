@@ -4,6 +4,7 @@ import 'package:browser_agevole/utils.dart/web_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserNotificationsScreen extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -12,6 +13,23 @@ class UserNotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _openInDefaultBrowser(String url) async {
+      final Uri uri = Uri.parse(url);
+
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(
+          uri,
+          mode: LaunchMode
+              .externalApplication, // Ensures it opens in the default browser
+        );
+      } else {
+        // Show an error if the URL can't be launched
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not open the URL: $url')),
+        );
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: SystemUiOverlayStyle.dark,
@@ -26,7 +44,7 @@ class UserNotificationsScreen extends StatelessWidget {
         ),
         surfaceTintColor: darkColor,
         title: Text(
-          'Notifications',
+          'Daily Updates',
           style: const TextStyle(
               fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
         ),
@@ -54,29 +72,7 @@ class UserNotificationsScreen extends StatelessWidget {
                   onTap: notification['url'] == ''
                       ? () {}
                       : () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                                      WebViewPage(url: notification['url']),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                const begin = Offset(1.0, 0.0);
-                                const end = Offset.zero;
-                                const curve = Curves.easeInOut;
-
-                                var tween = Tween(begin: begin, end: end)
-                                    .chain(CurveTween(curve: curve));
-                                var offsetAnimation = animation.drive(tween);
-
-                                return SlideTransition(
-                                  position: offsetAnimation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                          _openInDefaultBrowser(notification['url']);
                         },
                   child: Container(
                     padding:

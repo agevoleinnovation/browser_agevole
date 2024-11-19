@@ -34,7 +34,7 @@ apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace = "com.agevole.browser"
+    namespace = "com.agevole.website.zone"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
     buildToolsVersion "30.0.3"
@@ -50,7 +50,7 @@ android {
 
     defaultConfig {
        
-        applicationId = "com.agevole.browser"
+        applicationId = "com.agevole.website.zone"
        
        
         minSdkVersion 23                                                                         

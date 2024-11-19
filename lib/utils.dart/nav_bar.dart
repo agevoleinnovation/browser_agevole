@@ -16,7 +16,7 @@ String facebook = 'https://agevole.in';
 String twitter = 'https://agevole.in';
 String clientNumber = '8866369688';
 String supportMail = 'masumpatel@agevole.in';
-String packageName = 'com.agevole.browser';
+String packageName = 'com.agevole.website.zone';
 String playStoreUrl =
     'https://play.google.com/store/apps/details?id=$packageName';
 
@@ -40,7 +40,7 @@ class _NavBarState extends State<NavBar> {
   void initState() {
     super.initState();
     selectedIndex = widget.initialIndex;
-    setupFCM();
+    // setupFCM();
   }
 
   void _onItemTapped(int index) {
@@ -84,7 +84,7 @@ class _NavBarState extends State<NavBar> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Text(
-              'App Browser'.toUpperCase(),
+              'Website Zone'.toUpperCase(),
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 22,
@@ -372,7 +372,7 @@ class _NavBarState extends State<NavBar> {
         surfaceTintColor: Colors.transparent,
         title: Text(
           selectedIndex == 0
-              ? 'APP BROWSER'
+              ? 'Website Zone'.toUpperCase()
               : selectedIndex == 1
                   ? 'CATEGORY'
                   : 'FAVORITE',
@@ -396,7 +396,7 @@ class _NavBarState extends State<NavBar> {
               : Container(),
           IconButton(
             icon: Icon(
-              Icons.notifications_none_rounded,
+              Icons.diversity_1_rounded,
               color: darkColor,
             ),
             onPressed: () {

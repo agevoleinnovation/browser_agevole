@@ -112,8 +112,8 @@ class _HomePageState extends State<HomePage> {
                     itemCount: links.length,
                     itemBuilder: (context, index) {
                       final link = links[index];
-                      final bool advisability = link['advisability'] ?? true;
-                      if (!advisability) return const SizedBox.shrink();
+                      // final bool advisability = true;
+                      // if (!advisability) return const SizedBox.shrink();
 
                       return FutureBuilder<bool>(
                         future: isFavorite(link.id),
